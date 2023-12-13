@@ -1,0 +1,583 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Balya Ammar Resvaldi</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="author" content="kahfi">
+    <meta name="description" content="balyaammarresvaldi">
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.1/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.1/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.1/firebase-performance.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- cdn -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Antic+Slab&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html {
+        box-sizing: border-box;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      html::-webkit-scrollbar{
+        display: none;
+      }
+      body {
+        background-color: white;
+        font-weight: 400;
+        position: relative;
+        font-family: Noto;
+        font-family: 'Antic Slab', serif;
+      }
+      .style-wed{
+        font-family: 'Dancing Script', cursive;
+      }
+      .f-700{
+        font-weight: 700;
+      }
+      .f-14{
+        font-size: 0.875rem;
+      }
+
+      .f-16{
+        font-size: 16px;
+      }
+
+      .song{
+        position: fixed;
+        right: 12px;
+        bottom: 20px;
+        z-index: 200;
+        cursor: pointer;
+      }
+      .scroll-top {
+        animation: fadeInUp 1.5s infinite;
+      }
+      .bg-1{
+        background-size: cover;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+      .bg-1-mob:before{
+        content: "";
+        position: absolute;
+        background: linear-gradient(357.71deg,#2a3046 1.2%,rgba(50,56,82,.26) 21.74%,rgba(48,55,79,.33) 73.86%,rgba(0,0,0,.54) 97.41%);
+        width: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+      }
+      .profile img {
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        box-shadow: 0 4px 4px rgba(0,0,0);
+        object-fit: cover;
+        border: 2px solid #DAA520;
+      }
+      .calendar img.icon{
+        width: 25px;
+        height: 25px;
+      }
+      .calendar{
+        padding: 30px 20px;
+        position: relative;
+        overflow: hidden;
+        border: 4px solid #8e6a0f;
+      }
+      #demo{
+        color: white;
+        font-weight: 700;
+        background-color: #567d4f;
+        display: inline-block;
+        padding: 10px 40px;
+        border-radius: 5px;
+        box-shadow: 0 6px 7px rgba(0,0,0,.25);
+      }
+      .images{
+        object-fit: cover;
+        width: 100%;
+        object-position: center;
+        height: 220px;
+      }
+      .calendar .info{
+        display: flex;
+        padding-top: 10px;
+      }
+      a{
+        text-decoration: none !important;
+      }
+      .button-wed{
+        background-color: #567d4f;
+        color: white !important;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 15px 30px;
+        box-shadow: 0 6px 7px rgba(0,0,0,.25);
+        border-radius: 10px;
+        text-shadow: initial;
+        display: inline-block;
+        animation: pulse 1s infinite;
+      }
+     .shadow{
+        border-radius: 10px;
+        box-shadow: 0 6px 7px rgba(0,0,0,.25) !important;
+      }
+      .warp-main{
+        position: relative;
+        padding: 180px 0px;
+      }
+      .bgfix{
+        background-image: url('./src/bgfix.jpg');
+        height:100%;
+        z-index: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .bg-absolute{
+        position: absolute;
+        width: 350px;
+        z-index: -1;
+      }
+      .bg-absolute.abs-2{
+        top: 0;
+        right: 0;
+      }
+      .bg-absolute.abs-1{
+        bottom: 0;
+        left: 0;
+      }
+      .w-time{
+        background: #567d4f;
+        color: white;
+        display: inline-flex;
+        border-radius: 50%;
+        font-weight: 700;
+        height: 60px;
+        font-size: 1.5rem;
+        width: 60px;
+        align-items: center;
+        justify-content: center;
+        margin: 0 5px;
+        box-shadow: 0 6px 7px rgba(0,0,0,.25);
+        animation: pulse 1s infinite;
+      }
+      .images.images-1{
+          border-radius: 10px;
+      }
+      .warp-wedname {
+        color: white;
+        text-shadow: 3px 2px black;
+        position: relative;
+      }
+      .warp-wedname .button-wed{
+        border-radius: 30px;
+        padding: 10px 25px;
+      }
+      .swal2-title {
+        color: green !important;
+      }
+      .swal2-content{
+        color: black !important;
+      }
+      .swal2-popup{
+        background: white !important;
+      }
+      .swal2-styled.swal2-confirm:focus{
+        box-shadow: none !important;
+      }
+      .swal2-styled.swal2-confirm{
+        background-color: #567d4f !important;
+        border-radius: 30px !important;
+        animation: pulse 1s infinite;
+        padding: 8px 25px !important;
+        font-size: 0.9rem !important;
+      }
+      .bg-icon{
+        background: #567d4f;
+        padding: 8px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .bg-icon img{
+        filter: brightness(0) invert(1);
+      }
+
+      @media only screen and (min-width: 499px){
+        .images{
+          height: 390px;
+        }
+      }
+      @media only screen and (min-width: 768px){
+        .bg-absolute{
+          width: 400px;
+        }
+      }
+      @media only screen and (min-width: 992px){
+        .bg-absolute{
+          width: 450px;
+        }
+      }
+      @media only screen and (min-width: 1200px){
+        .images{
+          height: 600px;
+        }
+        .bg-absolute{
+          width: 35%;
+        }
+      }
+      @media only screen and (max-width: 767px){
+        .images.images-1{
+            height: 400px;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="song">
+        <audio controls class="d-none" id="mySong">
+          <source src="./src/song1.mp3" type="audio/ogg">
+          <source src="./src/song1.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <div class="bg-icon">  
+          <img src="./src/pause.png" class="icon-pausesong w-100" alt="">
+          <img src="./src/musicplay.png" class="icon-playsong w-100" height="18" alt="">
+        </div>
+        <div class="bg-icon mt-3">
+          <img src="./src/caretup.png" class="w-100 scroll-top" alt="">
+        </div>
+      </div>
+      <section class="sec-1">
+          <div class="container-fluid">
+            <div class="row d-xl-flex d-none align-items-center">
+              <div class="col-xl-6 text-center bg-1" style="background-image: url('./src/bg1.jpg');height: 100vh;">
+                <div class="warp pb-4"
+>                  <h2 class="style-wed">Tasyakuran & Aqiqah</h2>
+                  <h1 class="f-700 mt-4 style-wed" style="font-size: 4rem;color: #DAA520">Balya Ammar Resvaldi</h1>
+                  <h5 class="style-wed mt-4 f-700">| 24 . September . 2023 |</h5>
+                  <p>Jambi</p>
+                </div>
+              </div>
+              <div class="col-xl-6 d-xl-block d-none px-0">
+                  <div class="slick-slider-1">
+                    <div class="w-foto">
+                      <img class="images" style="height: 100vh;" src="./src/asd.jpeg" alt="">
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="row d-xl-none d-flex align-items-center">
+              <div class="col-12 text-center bg-1 bg-1-mob" style="background-image: url('./src/tes.png');height: 100vh;">
+                <div class="warp-wedname"
+>                 <h2 class="style-wed">Tasyakuran & Aqiqah</h2>
+                  <h1 class="f-700 mt-4 style-wed" style="font-size: 4.2rem">Balya Ammar Resvaldi</h1>
+                  <h5 class="style-wed mt-4 f-700">| 24 . September . 2023 |</h5>
+                  <p>Jambi</p>
+                  <div class="save-date mt-5 text-center">
+                        <a target="_blank" 
+                          class="button-wed"   
+                          rel="nofollow"
+                          href="https://www.google.com/calendar/render?action=TEMPLATE&text=Balya+Ammar+Resvaldi&details=Acara+Tasyakuran+%26+Aqiqah%0ABalya+Ammar+Resvaldi%0APukul+09.00am+-+selesai%0ABertempatan+di+Jln+Dr+Tazar+RT+12%0ABuluran+kenali+Telanaipura+-+Jambi&location=Jln.+Dr.+Tazar+RT+12%2C+Kel.+Buluran+kenali%2C+Kec.+Telanaipura%2C+Kota+Jambi%2C+Jambi+36361%2C+Indonesia&dates=20230924T020000Z%2F20230924T100000Z">
+                          Save The Date
+                        </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+      <section class="warp-main bgfix">
+        <img class="bg-absolute abs-1" src="./src/bg3.png" alt="">
+        <img class="bg-absolute abs-2" src="./src/bg2.png" alt="">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-10 mx-auto text-center">
+              <h4 class="style-wed" data-aos="zoom-in">Bismillahirrahmanirrahim</h4>
+              <p class="mt-5 f-16">Assalamu`alaikum Warahmatullahi Wabarakatuh</p>
+              <p class="mt-3 f-16">
+                Bersama ini kami mohon dengan hormat <br> kepada bapak/ibu sekalian untuk dapat <br>hadir dalam acara tasyakuran dan aqiqah <br>Putera kami yang bernama
+              </p>
+              <div class="mx-auto">
+                <div class="profile">
+                  <img data-aos="zoom-in" src="./src/tes2.jpg" alt="">
+                  <div class="mt-4">
+                    <h5 class="style-wed" style="font-size: 30px;"><b>Balya Ammar Resvaldi</b></h5>
+                    <p class="mb-1 f-16">Putra dari</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-2 align-items-center">
+                <div class="col-md-5">
+                  <div class="profile">
+                    <!-- <img data-aos="zoom-in" src="./src/tes3.png" alt=""> -->
+                    <div class="mt-4">
+                      <p class="mb-0">Bapak</p>
+                      <h5 class="f-700">Aprinaldi</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2 my-md-0 my-4">
+                  <span>~dan~</span>
+                </div>
+                <div class="col-md-5">
+                  <div class="profile">
+                    <!-- <img data-aos="zoom-in" src="./src/tes4.png" alt=""> -->
+                    <div class="mt-2">
+                      <p class="mb-0">Ibu</p>
+                      <h5 class="f-700">Suci Resvi Zulfiani</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="warp-main bgfix">
+        <img class="bg-absolute abs-1" src="./src/bg3.png" alt="">
+        <img class="bg-absolute abs-2" src="./src/bg2.png" alt="">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-9 mx-auto">
+                <div class="text-center">
+                    <h1 class="style-wed">Detail Acara</h1>
+                    <div class="watch-time mt-3" data-aos="zoom-in">
+                       <div id="day" class="w-time"></div>
+                       <div id="hour" class="w-time"></div>
+                       <div id="minute" class="w-time"></div>
+                       <div id="second" class="w-time"></div>
+                    </div>
+                    <p class="my-5 ">Dengan memohon rahmat dan ridho Allah Subhanahu Wa Ta'ala, kami mengundang Bapak/Ibu/Saudara(i) untuk menghadiri Acara Tasyakuran dan Aqiqah putra kami</p>
+                </div>
+                <div class="calendar shadow" style="background-color: #ffe1e1 ;" data-aos="fade-up">
+                    <h5 class="f-700 text-center">Tasyakuran & Aqiqah</h5>
+                    <div class="info">
+                      <img class="icon" src="./src/calender.png" alt=""> 
+                      <span class="pl-2">Minggu, 24 September 2023</span>
+                    </div>
+                    <div class="info">
+                      <img class="icon" src="./src/time.png" alt=""> 
+                      <span class="pl-2">09.00 WIB s/d Selesai</span>
+                    </div>
+                    <div class="info">
+                      <img class="icon" src="./src/location.png" alt=""> 
+                      <span class="pl-2">Jln. Dr. Tazar RT 12 Kel. Buluran Kenali, kec. Telanaipura, Kota Jambi</span>
+
+                    </div>
+                </div>
+                <div class="maps my-5" data-aos="fade-up">
+                  <iframe class="shadow" width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3988.2725144465758!2d103.56735367496621!3d-1.5949701983901592!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMzUnNDEuOSJTIDEwM8KwMzQnMTEuNyJF!5e0!3m2!1sen!2sid!4v1694984974462!5m2!1sen!2sid"></iframe>
+                </div>
+                <div class="save-date text-center">
+                      <a target="_blank" 
+                        class="button-wed"   
+                        rel="nofollow"
+                        href="https://www.google.com/calendar/render?action=TEMPLATE&text=Balya+Ammar+Resvaldi&details=Acara+Tasyakuran+%26+Aqiqah%0ABalya+Ammar+Resvaldi%0APukul+09.00am+-+selesai%0ABertempatan+di+Jln+Dr+Tazar+RT+12%0ABuluran+kenali+Telanaipura+-+Jambi&location=Jln.+Dr.+Tazar+RT+12%2C+Kel.+Buluran+kenali%2C+Kec.+Telanaipura%2C+Kota+Jambi%2C+Jambi+36361%2C+Indonesia&dates=20230924T020000Z%2F20230924T100000Z">
+                        Save The Date
+                      </a>
+                </div>
+                <p class="my-5 text-center f-700">Besar harapan kami jika Bapak/Ibu/Sahabat/Sdr/i berkenan hadir pada acara ini. <br>Atas perhatiannya Terima kasih</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section class="warp-main bgfix">
+        <img class="bg-absolute abs-1" src="./src/bg3.png" alt="">
+        <img class="bg-absolute abs-2" src="./src/bg2.png" alt="">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-7 col-md-8 mx-auto text-center">
+                  <img src="./src/tes6.png" alt="">
+                  <h4 class="style-wed mt-4">Semoga Allah SWT menjadikannya anak sholehah dan berbakti kepada kedua orang tua dan agamanya serta bermanfaat bagi bangsa dan negaranya.</h4>
+              </div>
+            </div>
+          </div>
+          
+       </section>
+
+
+      <section class="warp-main bgfix">
+        <img class="bg-absolute abs-1" src="./src/bg3.png" alt="">
+        <img class="bg-absolute abs-2" src="./src/bg2.png" alt="">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-7 col-md-8 mx-auto text-center profile">
+                  <img src="./src/tes7.jpg" style="border: 1px solid white; width: 230px; height: 230px;" data-aos="zoom-out" alt="">
+                  <h4 class="mt-4 f-700">Thank you </h4>
+                  <h5 class="style-wed">Aprinaldi - Suci Resvi Zulfiani</h5>
+              </div>
+            </div>
+          </div>
+          
+       </section>
+    </main>
+    <!-- cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.firestore().doc('/foo/bar').get().then(() => { });
+        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'firestore',
+            'functions',
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
+    </script>
+    <script>
+      AOS.init();
+      $('.slick-slider-2').slick({
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        autoplay: true,
+        dots: true,
+        arrows: false,
+        autoplaySpeed: 2000,
+        infinite: true,
+        responsive: [
+          {
+            breakpoint: 767,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          }
+        ]
+      });
+      let song = document.getElementById("mySong");
+      $('.icon-playsong').hide();
+      $('.icon-pausesong').click(function(){
+          $(this).hide(); 
+          song.play();
+          $('.icon-playsong').show();
+      }); 
+      $('.icon-playsong').click(function(){
+          $(this).hide(); 
+          song.pause();
+          $('.icon-pausesong').show();
+      }); 
+    
+      $('.scroll-top').click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+      });
+      let name = window.location.hash;
+      name = name.replace('#', '');
+      if(name){
+        Swal.fire({
+          title: `<h2 class="style-wed">Hello ${name}</h2>`,
+          text: 'You are cordially invited to our event on 24 September 2023!',
+          confirmButtonText: 'Okey',
+          showCloseButton: true,
+        })
+      }
+      var countDownDate = new Date("Sept 24, 2023 09:00:00").getTime();
+      var x = setInterval(function() {
+      var now = new Date().getTime();
+      var distance = countDownDate - now;
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("day").innerHTML = days + "d";
+      document.getElementById("hour").innerHTML = hours + "h";
+      document.getElementById("minute").innerHTML = minutes + "m";
+      document.getElementById("second").innerHTML = seconds + "s";
+      if (distance < 0) {
+        clearInterval(x);
+          document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+      }, 1000);
+    </script>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBCM2SjBsqs3ljSYWNfDGV7DJ-H_lxHwtg",
+        authDomain: "balya-ammar-resvaldi.firebaseapp.com",
+        projectId: "balya-ammar-resvaldi",
+        storageBucket: "balya-ammar-resvaldi.appspot.com",
+        messagingSenderId: "631076571153",
+        appId: "1:631076571153:web:5b1893461d1013f35209b0",
+        measurementId: "G-5NN56X4SXN"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
+  </body>
+</html>
